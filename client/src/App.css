@@ -1,0 +1,43 @@
+.App {
+  text-align: center;
+}
+
+.parent {
+  background-color: lightslategray;
+  padding: 20px;
+  font-size: 1.2rem;
+  color: black;
+  height: 100vh;
+}
+
+.ui.cards{
+  padding-top: 20px ;
+  text-align: center;
+  justify-content: center;
+}
+.card {
+  margin-bottom: 10px;
+}
+
+.ui.buttons .button {
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.completed .meta {
+  text-decoration: line-through;
+}
+
+.input-field {
+  width: 70%;
+  padding-bottom: 10px;
+}
+
+.submit-btn {
+  padding-top: 10px;
+  width: 30%;
+
+}
+h3{
+  text-transform: uppercase;
+}
