@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const Port = 8080;
+const port = 8080;
 const connection = require('./db');
 const bodyParser = require('body-parser');
 
@@ -20,34 +20,36 @@ app.get('/tasks', (req, res) => {
     }
   });
 });
-
+    
 app.post('/addTask', (req, res) => {
   const task = req.body.task;
-  const addQuery = `INSERT INTO todotaskmanager.tasks (tasks) VALUES ('${task}')`;
-  connection.query(addQuery, (err) => {
+  const addQuery = `INSERT INTO tasks (tasks) VALUES ('${task}');
+  `;
+  connection.query(addQuery, [task], (err) => {
     if (err) {
-      console.error(err);
-      res.status(500).send("Error adding task");
+      console.log(err);
+      res.status(500).send('Error adding task');
     } else {
-      res.send("Task added");
+      res.send('Task added');
     }
   });
 });
 
- app.delete('/deleteTask/:taskid', (req,res)=>{
     
-    const DELETE_Query= `delete from todotaskmanager.tasks where(taskid=${req.params.taskid})`
-    connection.query(DELETE_Query, (err) => {
+    app.delete('/deleteTask/:taskid', (req,res)=>{
+      const DELETE_Query= `DELETE FROM todotaskmanager.tasks WHERE taskid=${req.params.taskid}`;
+      connection.query(DELETE_Query, (err) => {
         if (err) {
           console.error(err);
-          res.status(404).send("Delete unsuccesful");
+          res.status(404).send("Delete unsuccessful");
         } else {
           res.send("Task Deleted");
         }
       });
- })
-
-
-app.listen(Port, () => {
-  console.log(`Server listening at http://localhost:${Port}`);
-});
+    });
+    
+    app.listen(port, () => {
+      console.log(`Server listening at http://localhost:${port}`);
+    });
+    
+  
