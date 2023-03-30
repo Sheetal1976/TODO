@@ -13,17 +13,16 @@ class Tasklist extends React.Component {
     this.getTask();
   }
 
- 
-
   getTask = () => {
     axios.get('http://localhost:8080/tasks').then((res) => {
-      this.setState({ tasklist: res.data });
+      this.setState({ tasklist: res.data});
     });
   };
 
   onDeleteClick = taskid => {
-    axios.delete(`http://localhost:8080/deleteTask/${taskid}`)
-    this.getTask();
+    axios.delete(`http://localhost:8080/deleteTask/${taskid}`).then(() => {
+      this.getTask();
+    });
   };
 
   onDoneClick = (taskid) => {
@@ -37,10 +36,10 @@ class Tasklist extends React.Component {
   onSubmitClick = () => {
     axios.post('http://localhost:8080/addTask', {
       task: this.state.task,
+    }).then(() => {
+      this.setState({ task: '' });
+      this.getTask();
     });
-    
-    this.setState({task:''})
-    this.getTask();
   };
 
   render() {
